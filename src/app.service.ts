@@ -1027,11 +1027,11 @@ export class AppService {
           {
             if(result[breed + "(подстилочный)"])
             {
-              result[breed + "(подстилочный)"] += unlineddiff * (data.Головы.подстилочный[breed][subbreed][subsubbreed] * productionData[breed][subbreed][subsubbreed] + data.Головы.подстилочный[breed][subbreed][subsubbreed] * fillersdata[breed][subbreed][subsubbreed])/1000
+              result[breed + "(подстилочный)"] += beddingdiff * (data.Головы.подстилочный[breed][subbreed][subsubbreed] * productionData[breed][subbreed][subsubbreed] + data.Головы.подстилочный[breed][subbreed][subsubbreed] * fillersdata[breed][subbreed][subsubbreed])/1000
             }
             else
             {
-              result[breed + "(подстилочный)"] = unlineddiff * (data.Головы.подстилочный[breed][subbreed][subsubbreed] * productionData[breed][subbreed][subsubbreed] + data.Головы.подстилочный[breed][subbreed][subsubbreed] * fillersdata[breed][subbreed][subsubbreed])/1000
+              result[breed + "(подстилочный)"] = beddingdiff * (data.Головы.подстилочный[breed][subbreed][subsubbreed] * productionData[breed][subbreed][subsubbreed] + data.Головы.подстилочный[breed][subbreed][subsubbreed] * fillersdata[breed][subbreed][subsubbreed])/1000
             }
           }
         }
@@ -1039,11 +1039,11 @@ export class AppService {
         {
           if(result[breed + "(подстилочный)"])
           {
-            result[breed + "(подстилочный)"] += unlineddiff * (data.Головы.подстилочный[breed][subbreed] * productionData[breed][subbreed] + data.Головы.подстилочный[breed][subbreed] * fillersdata[breed][subbreed])/1000
+            result[breed + "(подстилочный)"] += beddingdiff * (data.Головы.подстилочный[breed][subbreed] * productionData[breed][subbreed] + data.Головы.подстилочный[breed][subbreed] * fillersdata[breed][subbreed])/1000
           }
           else
           {
-            result[breed + "(подстилочный)"] = unlineddiff * (data.Головы.подстилочный[breed][subbreed] * productionData[breed][subbreed] + data.Головы.подстилочный[breed][subbreed] * fillersdata[breed][subbreed])/1000
+            result[breed + "(подстилочный)"] = beddingdiff * (data.Головы.подстилочный[breed][subbreed] * productionData[breed][subbreed] + data.Головы.подстилочный[breed][subbreed] * fillersdata[breed][subbreed])/1000
           }
         }
         }
@@ -1059,11 +1059,11 @@ export class AppService {
             {
               if(result[breed + "(бесподстилочный)"])
               {
-                result[breed + "(бесподстилочный)"] += beddingdiff * data.Головы.бесподстилочный[breed][subbreed][subsubbreed] * productionData[breed][subbreed][subsubbreed]/1000
+                result[breed + "(бесподстилочный)"] += unlineddiff * data.Головы.бесподстилочный[breed][subbreed][subsubbreed] * productionData[breed][subbreed][subsubbreed]/1000
               }
               else
               {
-                result[breed + "(бесподстилочный)"] = beddingdiff * data.Головы.бесподстилочный[breed][subbreed][subsubbreed] * productionData[breed][subbreed][subsubbreed]/1000
+                result[breed + "(бесподстилочный)"] = unlineddiff * data.Головы.бесподстилочный[breed][subbreed][subsubbreed] * productionData[breed][subbreed][subsubbreed]/1000
             }
             }
           }
@@ -1071,11 +1071,11 @@ export class AppService {
           {
             if(result[breed + "(бесподстилочный)"])
             {
-              result[breed + "(бесподстилочный)"] += beddingdiff * data.Головы.бесподстилочный[breed][subbreed] * productionData[breed][subbreed]/1000
+              result[breed + "(бесподстилочный)"] += unlineddiff * data.Головы.бесподстилочный[breed][subbreed] * productionData[breed][subbreed]/1000
             }
             else
             {
-              result[breed + "(бесподстилочный)"] = beddingdiff * data.Головы.бесподстилочный[breed][subbreed] * productionData[breed][subbreed]/1000
+              result[breed + "(бесподстилочный)"] = unlineddiff * data.Головы.бесподстилочный[breed][subbreed] * productionData[breed][subbreed]/1000
             }
           }
         }
