@@ -6,6 +6,8 @@ import { productionData } from './constants/productionData';
 import { fillersdata } from './constants/fillersData';
 import { fancynames } from './constants/fancynames';
 import { unfancynames } from './constants/unfancynames';
+import tempfile from 'tempfile';
+
 @Injectable()
 export class AppService {
   createDocument(data: Record<string, any>){
@@ -1002,13 +1004,14 @@ export class AppService {
           },
       ],
   });
-
+  const file = tempfile()
   Packer.toBuffer(doc).then((buffer) => {
-      fs.writeFileSync("My Document.docx", buffer);
+      fs.writeFileSync(file, buffer);
   });
 
+  
 
-
+  return file
   }
 
   calculate(data : Record<string, any>)
@@ -1111,14 +1114,18 @@ export class AppService {
       }
       else
       {
-        if (data.Остатки.подстилочный[unfancynames[key]])
+        if (key.split('(')[1] == "подстилочный)")
         {
-          returnresult[key] =   Math.ceil(fancyresult[key] + data.Остатки.подстилочный[unfancynames[key]]).toString() + ` (в том числе числе ${data.Остатки.подстилочный[unfancynames[key]]} накопленные ранее)`
+          if (data.Остатки.подстилочный[unfancynames[key]])
+          {
+            returnresult[key] =   Math.ceil(fancyresult[key] + data.Остатки.подстилочный[unfancynames[key]]).toString() + ` (в том числе числе ${data.Остатки.подстилочный[unfancynames[key]]} накопленные ранее)`
+          }
+          else 
+          {
+            returnresult[key] = Math.ceil(fancyresult[key]).toString()
+          }
         }
-        else 
-        {
-          returnresult[key] = Math.ceil(fancyresult[key]).toString()
-        }
+        
       }
     }
     return returnresult
