@@ -6,7 +6,6 @@ import { productionData } from './constants/productionData';
 import { fillersdata } from './constants/fillersData';
 import { fancynames } from './constants/fancynames';
 import { unfancynames } from './constants/unfancynames';
-import tempfile from 'tempfile';
 
 @Injectable()
 export class AppService {
@@ -1004,14 +1003,12 @@ export class AppService {
           },
       ],
   });
-  const file = tempfile()
   Packer.toBuffer(doc).then((buffer) => {
-      fs.writeFileSync(file, buffer);
+      fs.writeFileSync("file", buffer);
   });
 
   
 
-  return file
   }
 
   calculate(data : Record<string, any>)
