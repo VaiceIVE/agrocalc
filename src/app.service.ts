@@ -13,7 +13,7 @@ import { Readable } from 'stream';
 @Injectable()
 export class AppService {
   async createDocument(data: Record<string, any>){
-    const resultvalues = this.calculate(data)
+    const resultvalues = await this.calculate(data)
     var tablerows = [
       new TableRow({
         cantSplit: true,
@@ -213,6 +213,7 @@ export class AppService {
       })
     )
     var i = 1
+    console.log(resultvalues)
     for (const type in resultvalues)
     {
       tablerows.push(
@@ -285,9 +286,11 @@ export class AppService {
                   children:
                   [
                     new TextRun({
-                      text: ``,
+                      text: `${data.works[type].ownValue  > 0 ? `Планируемые сроки использования: ${data.works[type].period} 
+                      Результат использования: ${data.works[type].ownResult == "making" ? 
+                     `производство органического удобрения (№${data.works[type].ownResult.number} свидетельства о государственной регистрации на пестицид и агрохимикат) в количестве` : 
+                     'улучшение плодородия земель в объеме ' + data.works[type].ownValue}` : '-'}`,
                       italics: true
-  
                     })
                   ]
                 })
@@ -300,7 +303,10 @@ export class AppService {
                   children:
                   [
                     new TextRun({
-                      text: "",
+                      text: `${data.works[type].transferValue > 0 ? `Передача побочных продуктов животноводства ${data.works[type].name} 
+                      Результат использования: ${data.works[type].transferResult == "making" ? 
+                     `производство органического удобрения в количестве` : 
+                     'улучшение плодородия земель в объеме ' + data.works[type].transferValue}` : '-'}`,
                       italics: true
   
                     })
@@ -313,6 +319,7 @@ export class AppService {
       )
       i++;
     }
+    console.log(tablerows)
     const doc = new Document({
       sections: [
           {
@@ -1011,7 +1018,11 @@ export class AppService {
   
   fs.writeFileSync(join(process.cwd(),"myfile.docx"), await Packer.toBuffer(doc));
 
-  const file = fs.createReadStream(join(process.cwd(), "myfile.docx"), {encoding: "utf-8"});
+  //const file = fs.createReadStream(join(process.cwd(), "myfile.docx"), {encoding: "utf-8"});
+
+  Packer.toBuffer(doc).then((buffer) => {
+    fs.writeFileSync("My Document.docx", buffer);
+});
 
   console.log(await Packer.toBuffer(doc))
 
@@ -1088,7 +1099,6 @@ export class AppService {
           }
         }
       }
-      console.log(result)
 
     let fancyresult = {}
 
@@ -1103,23 +1113,11 @@ export class AppService {
         fancyresult[fancynames[breed]] += result[breed]
       }
     }
-    console.log(fancyresult)
     let returnresult = {}
 
     for (const key in fancyresult)
     {
-      if (key.split('(')[1] == "бесподстилочный)")
-      {
-        if (data.Остатки.бесподстилочный[unfancynames[key]])
-        {
-          returnresult[key] =   Math.ceil(fancyresult[key] + data.Остатки.бесподстилочный[unfancynames[key]]).toString() + ` (в том числе числе ${data.Остатки.бесподстилочный[unfancynames[key]]} накопленные ранее)`
-        }
-        else 
-        {
-          returnresult[key] = Math.ceil(fancyresult[key]).toString()
-        }
-      }
-      else
+      if (key.split('(')[1] == "подстилочный)")
       {
         if (data.Остатки.подстилочный[unfancynames[key]])
         {
@@ -1130,7 +1128,19 @@ export class AppService {
           returnresult[key] = Math.ceil(fancyresult[key]).toString()
         }
       }
+      else
+      {
+        if (data.Остатки.бесподстилочный[unfancynames[key]])
+        {
+          returnresult[key] =   Math.ceil(fancyresult[key] + data.Остатки.бесподстилочный[unfancynames[key]]).toString() + ` (в том числе числе ${data.Остатки.бесподстилочный[unfancynames[key]]} накопленные ранее)`
+        }
+        else 
+        {
+          returnresult[key] = Math.ceil(fancyresult[key]).toString()
+        }
+      }
     }
+    console.log(returnresult)
     return returnresult
   }
 }
