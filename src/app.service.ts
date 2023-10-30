@@ -288,7 +288,7 @@ export class AppService {
                     new TextRun({
                       text: `${data.works[type].ownValue  > 0 ? `Планируемые сроки использования: ${data.works[type].period} 
                       Результат использования: ${data.works[type].ownResult == "making" ? 
-                     `производство органического удобрения (№${data.works[type].ownResult.number} свидетельства о государственной регистрации на пестицид и агрохимикат) в количестве` : 
+                     `производство органического удобрения (№${data.works[type].number} свидетельства о государственной регистрации на пестицид и агрохимикат) в количестве` : 
                      'улучшение плодородия земель в объеме ' + data.works[type].ownValue}` : '-'}`,
                       italics: true
                     })

@@ -13,7 +13,7 @@ export class AppController {
     return this.appService.calculate(data)
   }
 
-  @Header('Content-Type', 'application/msword')
+  @Header('Content-Type', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document, charset=utf-8')
   @Header('Content-Disposition', 'attachment; filename="myfile.docx"')
   @Post('document')
   async getDocument(@Body() data: Record<string, any>, @Res({ passthrough: true }) res: Response)
@@ -28,8 +28,8 @@ export class AppController {
     //const stream = res.writeHead(200)
     //file.on('data', (chunk) => stream.write(chunk));
     //file.on('end', () => stream.end());
-    res.type('application/msword').send(file)
-     //return new StreamableFile()
+    //res.type('application/vnd.openxmlformats-officedocument.wordprocessingml.document').send(file)
+     return new StreamableFile(Readable.from(file))
   }
 
 }
