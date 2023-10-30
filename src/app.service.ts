@@ -6,10 +6,13 @@ import { productionData } from './constants/productionData';
 import { fillersdata } from './constants/fillersData';
 import { fancynames } from './constants/fancynames';
 import { unfancynames } from './constants/unfancynames';
+import * as tmp from 'tmp'
+import { join } from 'path';
+import { Readable } from 'stream';
 
 @Injectable()
 export class AppService {
-  createDocument(data: Record<string, any>){
+  async createDocument(data: Record<string, any>){
     const resultvalues = this.calculate(data)
     var tablerows = [
       new TableRow({
@@ -282,7 +285,7 @@ export class AppService {
                   children:
                   [
                     new TextRun({
-                      text: "",
+                      text: ``,
                       italics: true
   
                     })
@@ -342,7 +345,7 @@ export class AppService {
                       new TextRun({
                         size: 26,
                         bold: true,
-                        text: `  ${data.dateBeg.split('.')[2]}  `,
+                        text: `  20${data.dateBeg.split('.')[2]}  `,
                         underline: {
                           type: UnderlineType.SINGLE,
                           color: "990011",
@@ -378,7 +381,7 @@ export class AppService {
                           type: UnderlineType.SINGLE,
                           color: "990011",
                         },
-                        text: ` ${data.year} `,
+                        text: ` ${data.dateBeg.split('.')[0]} `,
                       }),
                       new TextRun({
                         size: 26,
@@ -403,7 +406,7 @@ export class AppService {
                       new TextRun({
                         size: 26,
                         bold: false,
-                        text: `${(data.dateBeg.split('.')[2] as string).slice(2)}`,
+                        text: `${(data.dateBeg.split('.')[2])}`,
                         underline: {
                           type: UnderlineType.SINGLE,
                           color: "990011",
@@ -1003,15 +1006,20 @@ export class AppService {
           },
       ],
   });
-  Packer.toBuffer(doc).then((buffer) => {
-      fs.writeFileSync("file", buffer);
-  });
 
+  //var tempfile = tmp.fileSync({postfix: "docx"});
   
+  fs.writeFileSync(join(process.cwd(),"myfile.docx"), await Packer.toBuffer(doc));
 
+  const file = fs.createReadStream(join(process.cwd(), "myfile.docx"), {encoding: "utf-8"});
+
+  console.log(await Packer.toBuffer(doc))
+
+  return await Packer.toBuffer(doc)
+  
   }
 
-  calculate(data : Record<string, any>)
+  async calculate(data : Record<string, any>)
   {
     let result = {}
     const beddingdiff = data.beddingDiff
@@ -1080,6 +1088,8 @@ export class AppService {
           }
         }
       }
+      console.log(result)
+
     let fancyresult = {}
 
     for (const breed in result)
@@ -1093,7 +1103,7 @@ export class AppService {
         fancyresult[fancynames[breed]] += result[breed]
       }
     }
-
+    console.log(fancyresult)
     let returnresult = {}
 
     for (const key in fancyresult)
@@ -1111,18 +1121,14 @@ export class AppService {
       }
       else
       {
-        if (key.split('(')[1] == "подстилочный)")
+        if (data.Остатки.подстилочный[unfancynames[key]])
         {
-          if (data.Остатки.подстилочный[unfancynames[key]])
-          {
-            returnresult[key] =   Math.ceil(fancyresult[key] + data.Остатки.подстилочный[unfancynames[key]]).toString() + ` (в том числе числе ${data.Остатки.подстилочный[unfancynames[key]]} накопленные ранее)`
-          }
-          else 
-          {
-            returnresult[key] = Math.ceil(fancyresult[key]).toString()
-          }
+          returnresult[key] =   Math.ceil(fancyresult[key] + data.Остатки.подстилочный[unfancynames[key]]).toString() + ` (в том числе числе ${data.Остатки.подстилочный[unfancynames[key]]} накопленные ранее)`
         }
-        
+        else 
+        {
+          returnresult[key] = Math.ceil(fancyresult[key]).toString()
+        }
       }
     }
     return returnresult
