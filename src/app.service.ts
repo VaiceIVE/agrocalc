@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import * as fs from "fs";
-import { Document, Packer, Paragraph, TextRun, AlignmentType, TableRow, TableCell, Table, BorderStyle, UnderlineType, WidthType, VerticalAlign } from "docx";
+import { Document, Packer, Paragraph, TextRun, AlignmentType, TableRow, TableCell, Table, BorderStyle, UnderlineType, WidthType, VerticalAlign, PrettifyType } from "docx";
 import {months} from './constants/months' 
 import { productionData } from './constants/productionData';
 import { fillersdata } from './constants/fillersData';
@@ -320,7 +320,7 @@ export class AppService {
       i++;
     }
     console.log(tablerows)
-    const doc = new Document({
+    const doc = await new Document({
       sections: [
           {
               properties: {},
@@ -1014,20 +1014,13 @@ export class AppService {
       ],
   });
 
-  //var tempfile = tmp.fileSync({postfix: "docx"});
-  
-  fs.writeFileSync(join(process.cwd(),"myfile.docx"), await Packer.toBuffer(doc));
-
-  //const file = fs.createReadStream(join(process.cwd(), "myfile.docx"), {encoding: "utf-8"});
-
-  Packer.toBuffer(doc).then((buffer) => {
-    fs.writeFileSync("My Document.docx", buffer);
-});
-
-  console.log(await Packer.toBuffer(doc))
 
   return await Packer.toBuffer(doc)
   
+  }
+  async sendFile(): Promise<Readable>
+  {
+    return fs.createReadStream("myfile.docx")
   }
 
   async calculate(data : Record<string, any>)
@@ -1056,6 +1049,7 @@ export class AppService {
         }
         else
         {
+          console.log(breed)
           if(result[breed + "(подстилочный)"])
           {
             result[breed + "(подстилочный)"] += beddingdiff * (data.Головы.подстилочный[breed][subbreed] * productionData[breed][subbreed] + data.Головы.подстилочный[breed][subbreed] * fillersdata[breed][subbreed])/1000

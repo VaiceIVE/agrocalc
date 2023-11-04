@@ -1,0 +1,12 @@
+version: "3.3"
+services:
+  nest:
+    image: node:20
+    restart: "always"
+    volumes:
+      - ./:/nest-agro/
+    ports:
+      - 8000:8000
+    working_dir: /nest-agro/
+    command: npm install 
+    entrypoint: npm run start
