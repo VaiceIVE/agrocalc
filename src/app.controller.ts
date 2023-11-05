@@ -20,7 +20,6 @@ export class AppController {
   async getDocument(@Body() data: Record<string, any>, @Res({ passthrough: true }) res: Response)
   {
     const file = await this.appService.createDocument(data)
-
     console.log(file)
 
     //const file = fs.createReadStream("myfile.docx", "utf-8");

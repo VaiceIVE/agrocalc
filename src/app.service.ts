@@ -1014,6 +1014,9 @@ export class AppService {
       ],
   });
 
+  Packer.toBuffer(doc).then((buffer) => {
+    fs.writeFileSync("myfile.docx", buffer);
+});
 
   return await Packer.toBuffer(doc)
   
