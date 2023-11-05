@@ -1032,6 +1032,10 @@ export class AppService {
     const beddingdiff = data.beddingDiff
     const unlineddiff = data.unlinedDiff
     //Считаем подстилочный по формуле
+    if (data.Головы)
+    {
+      
+    
     for (const breed in data.Головы.подстилочный)
     {
       for (const subbreed in data.Головы.подстилочный[breed])
@@ -1139,5 +1143,6 @@ export class AppService {
     }
     console.log(returnresult)
     return returnresult
+  }
   }
 }
