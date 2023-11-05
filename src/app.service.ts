@@ -1035,7 +1035,6 @@ export class AppService {
     if (data.Головы)
     {
       
-    
     for (const breed in data.Головы.подстилочный)
     {
       for (const subbreed in data.Головы.подстилочный[breed])
@@ -1115,7 +1114,10 @@ export class AppService {
       }
     }
     let returnresult = {}
+    if (fancyresult)
+    {
 
+    
     for (const key in fancyresult)
     {
       if (key.split('(')[1] == "подстилочный)")
@@ -1140,7 +1142,7 @@ export class AppService {
           returnresult[key] = Math.ceil(fancyresult[key]).toString()
         }
       }
-    }
+    }}
     console.log(returnresult)
     return returnresult
   }
