@@ -12,7 +12,9 @@ async function bootstrap() {
       "http://178.170.192.87:3000",
       "http://178.170.192.87:3000/",
       "http://178.170.192.87:8888",
-      "http://178.170.192.87:8888/"
+      "http://178.170.192.87:8888/",
+      "https://agrocalc.adera-team.ru",
+      "https://agrocalc.adera-team.ru/"
     ]
   })
   useContainer(app.select(AppModule), { 
