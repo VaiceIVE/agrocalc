@@ -10,7 +10,9 @@ async function bootstrap() {
       "http://localhost:5173",
       "http://127.0.0.1:5173",
       "http://178.170.192.87:3000",
-      "http://178.170.192.87:3000/"
+      "http://178.170.192.87:3000/",
+      "http://178.170.192.87:8888",
+      "http://178.170.192.87:8888/"
     ]
   })
   useContainer(app.select(AppModule), { 
