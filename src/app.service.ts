@@ -216,6 +216,8 @@ export class AppService {
     console.log(resultvalues)
     for (const type in resultvalues)
     {
+      console.log("own: " + data.works[type].ownValue)
+      console.log("transfer: " + data.works[type].transferValue)
       tablerows.push(
         new TableRow({
           cantSplit: true,
@@ -288,7 +290,7 @@ export class AppService {
                     new TextRun({
                       text: `${data.works[type].ownValue  > 0 ? `Планируемые сроки использования: ${data.works[type].period} 
                       Результат использования: ${data.works[type].ownResult == "making" ? 
-                     `производство органического удобрения (№${data.works[type].number} свидетельства о государственной регистрации на пестицид и агрохимикат) в количестве` : 
+                     `производство органического удобрения (№${data.works[type].number} свидетельства о государственной регистрации на пестицид и агрохимикат) в количестве` + data.works[type].transferValue : 
                      'улучшение плодородия земель в объеме ' + data.works[type].ownValue}` : '-'}`,
                       italics: true
                     })
@@ -305,7 +307,7 @@ export class AppService {
                     new TextRun({
                       text: `${data.works[type].transferValue > 0 ? `Передача побочных продуктов животноводства ${data.works[type].name} 
                       Результат использования: ${data.works[type].transferResult == "making" ? 
-                     `производство органического удобрения в количестве` : 
+                     `производство органического удобрения в количестве` + data.works[type].transferValue: 
                      'улучшение плодородия земель в объеме ' + data.works[type].transferValue}` : '-'}`,
                       italics: true
   
