@@ -1101,6 +1101,7 @@ export class AppService {
           }
         }
       }
+    console.log(result)
 
     let fancyresult = {}
 
@@ -1118,7 +1119,7 @@ export class AppService {
     let returnresult = {}
     if (fancyresult)
     {
-
+      console.log(fancyresult)
     
     for (const key in fancyresult)
     {
