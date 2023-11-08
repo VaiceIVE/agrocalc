@@ -276,7 +276,7 @@ export class AppService {
                   children:
                   [
                     new TextRun({
-                      text: data.beddingPeriod,
+                      text: type.split('(')[1] == 'подстилочный)' ? data.beddingPeriod : data.unlinedPeriod,
                       italics: true
   
                     })
