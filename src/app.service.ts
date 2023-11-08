@@ -1045,9 +1045,10 @@ export class AppService {
         {
           for (const subsubbreed in data.Головы.подстилочный[breed][subbreed])
           {
-            console.log(data.Головы.подстилочный[breed][subbreed][subsubbreed])
-            console.log(productionData[breed][subbreed][subsubbreed])
-            console.log(fillersdata[breed][subbreed][subsubbreed])
+            console.log(breed + ' ' + subbreed)
+            console.log('data' + data.Головы.подстилочный[breed][subbreed][subsubbreed])
+            console.log('proddata' + productionData[breed][subbreed][subsubbreed])
+            console.log('filters' + fillersdata[breed][subbreed][subsubbreed])
             if(result[breed + "(подстилочный)"])
             {
               result[breed + "(подстилочный)"] += beddingdiff * (data.Головы.подстилочный[breed][subbreed][subsubbreed] * productionData[breed][subbreed][subsubbreed] + data.Головы.подстилочный[breed][subbreed][subsubbreed] * fillersdata[breed][subbreed][subsubbreed])/1000
