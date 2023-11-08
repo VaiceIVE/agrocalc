@@ -217,6 +217,8 @@ export class AppService {
     console.log(resultvalues)
     for (const type in resultvalues)
     {
+      console.log(type)
+      console.log(resultvalues[type])
       console.log("own: " + data.works[type].ownValue)
       console.log("transfer: " + data.works[type].transferValue)
       tablerows.push(
