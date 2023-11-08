@@ -14,6 +14,7 @@ import { Readable } from 'stream';
 export class AppService {
   async createDocument(data: Record<string, any>){
     const resultvalues = await this.calculate(data)
+    console.log('DONE')
     var tablerows = [
       new TableRow({
         cantSplit: true,
