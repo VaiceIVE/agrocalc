@@ -979,7 +979,7 @@ export class AppService {
                     indent: {left: 400},
                     children:[
                       new TextRun({
-                        text: "Адрес электронной почты (при наличии)"
+                        text: "Адрес электронной почты (при наличии): "
                       }),
                       new TextRun({
                         text: data.email,
