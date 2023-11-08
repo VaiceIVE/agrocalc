@@ -354,7 +354,7 @@ export class AppService {
                       new TextRun({
                         size: 26,
                         bold: true,
-                        text: `  20${data.year}  `,
+                        text: `  ${data.year}  `,
                         underline: {
                           type: UnderlineType.SINGLE,
                           color: "990011",
