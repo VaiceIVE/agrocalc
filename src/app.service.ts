@@ -965,7 +965,7 @@ export class AppService {
                         text: "Номер телефона: "
                       }),
                       new TextRun({
-                        text: "+7***-***-**-**    ",
+                        text: data.phone,
                         underline: {
                           type: UnderlineType.SINGLE,
                           color: "990011",
@@ -982,7 +982,7 @@ export class AppService {
                         text: "Адрес электронной почты (при наличии)"
                       }),
                       new TextRun({
-                        text: "                              ",
+                        text: data.email,
                         underline: {
                           type: UnderlineType.SINGLE,
                           color: "990011",
