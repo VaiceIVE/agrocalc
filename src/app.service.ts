@@ -1134,7 +1134,7 @@ export class AppService {
       {
         if (data.Остатки.подстилочный[unfancynames[key]])
         {
-          returnresult[key] =   Math.ceil(fancyresult[key] + data.Остатки.подстилочный[unfancynames[key]]).toString() + ` (в том числе числе ${data.Остатки.подстилочный[unfancynames[key]]} накопленные ранее)`
+          returnresult[key] =   Math.ceil(fancyresult[key] + data.Остатки.подстилочный[unfancynames[key]]).toString() + ` (в том числе ${data.Остатки.подстилочный[unfancynames[key]]} накопленные ранее)`
         }
         else 
         {
@@ -1145,7 +1145,7 @@ export class AppService {
       {
         if (data.Остатки.бесподстилочный[unfancynames[key]])
         {
-          returnresult[key] =   Math.ceil(fancyresult[key] + data.Остатки.бесподстилочный[unfancynames[key]]).toString() + ` (в том числе числе ${data.Остатки.бесподстилочный[unfancynames[key]]} накопленные ранее)`
+          returnresult[key] =   Math.ceil(fancyresult[key] + data.Остатки.бесподстилочный[unfancynames[key]]).toString() + ` (в том числе ${data.Остатки.бесподстилочный[unfancynames[key]]} накопленные ранее)`
         }
         else 
         {
